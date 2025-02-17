@@ -1,42 +1,74 @@
-# Indique aux robots que toutes les pages peuvent être explorées, sauf restrictions spécifiées
 User-agent: *
+Disallow: /cgi-bin/
 Disallow: /admin/
 Disallow: /tmp/
 Disallow: /private/
+Disallow: /search/
+Disallow: /*?*
 
-# Bloquer des URL avec paramètres inutiles pour l'indexation
-Disallow: /*?debug=true
-Disallow: /*?preview=true
+# Allow minden fontos tartalomhoz és médiafájlhoz
+Allow: /
 
-# Permettre les fichiers nécessaires au bon affichage et fonctionnement
-Allow: /css/
-Allow: /js/
-Allow: /images/
+# Sitemap helyének pontos megadása
+Sitemap: https://clairvoyancemedium.github.io/Hogyan-szerezd-vissza-eleted-ferfijat-es-talald-meg-ujra-a-szerelmet.github.io/sitemap.xml
+Sitemap: https://clairvoyancemedium.github.io/Hogyan-szerezd-vissza-eleted-ferfijat-es-talald-meg-ujra-a-szerelmet.github.io/sitemap_index.xml
 
-# Référencement des ressources multimédias
-Allow: *.png
-Allow: *.jpg
-Allow: *.webp
-Allow: *.css
-Allow: *.js
+# AI és hangsegédek támogatása
+User-agent: Googlebot-AI
+Allow: /
 
-# Fournir le chemin du fichier sitemap pour une meilleure indexation
-Sitemap: https://www.clairvoyancemedium.com/sitemap.xml
+User-agent: Googlebot-Voice
+Allow: /
 
-# Autorisation pour les robots Google et Bing pour maximiser les campagnes publicitaires
+User-agent: Bingbot-AI
+Allow: /
+
+User-agent: Bingbot-Voice
+Allow: /
+
+# Speciális szabályok a gyorsabb indexeléshez és AI feldolgozáshoz
 User-agent: Googlebot
 Allow: /
-User-agent: AdsBot-Google
+
+User-agent: *AI*
 Allow: /
+
+# Gyors SEO frissítések támogatása
+User-agent: *
+Allow: /robots.txt
+Allow: /sitemap.xml
+Allow: /favicon.ico
+Allow: /manifest.json # PWA támogatás
+
+# Speciális szabályok a médiafájlokhoz
+User-agent: *
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Frissítési gyakoriság ajánlása
+User-agent: *
+Visit-time: 01:00-09:00 # Alacsony forgalmú időszakok
+
+# Kérés a gyorsabb indexeléshez és AI feldolgozáshoz
+Host: clairvoyancemedium.github.io
+
+# Crawl-delay Bing és más keresőmotorok számára
 User-agent: Bingbot
-Allow: /
+Crawl-delay: 5
 
-# Bloquer les robots nuisibles ou non désirés
-User-agent: BadBot
-Disallow: /
-User-agent: EvilScraper
-Disallow: /
+User-agent: *
+Crawl-delay: 5
 
-# Empêcher l'exploration des fichiers sensibles
-Disallow: /config/
-Disallow: /backup/
+# SEO Friendly URL struktúra
+User-agent: *
+Disallow: /old/ # Ha vannak régi, nem SEO-barát URL-ek
+
+# Fájlok kezelése: PDF, DOC, XLS
+# Megjegyzés: Ha ezek a fájlok hasznos tartalmat tartalmaznak, ne blokkoljuk őket, de kezeljük a régi vagy érzékeny fájlokat
+# Disallow: /archive/*.pdf$
+# Disallow: /archive/*.doc$
+# Disallow: /archive/*.xls$
